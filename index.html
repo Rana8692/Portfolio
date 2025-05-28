@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rana Sutradhar - Interactive Portfolio Showcase</title>
+    <meta name="description" content="Interactive Portfolio for Rana Sutradhar, MIS Executive and Data Specialist.">
+    <meta name="author" content="Rana Sutradhar">
+
+    <meta property="og:title" content="Rana Sutradhar - Interactive Portfolio Showcase">
+    <meta property="og:description" content="Dynamic MIS Executive transforming data into actionable insights.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.ibb.co/m5JnW72N/Rana-photoaidcom-cropped.png">
+    <meta property="og:url" content="YOUR_PORTFOLIO_URL_HERE"> <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@YourTwitterHandle"> <meta name="twitter:title" content="Rana Sutradhar - Interactive Portfolio Showcase">
+    <meta name="twitter:description" content="Dynamic MIS Executive transforming data into actionable insights.">
+    <meta name="twitter:image" content="https://i.ibb.co/m5JnW72N/Rana-photoaidcom-cropped.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" href="https://placehold.co/32x32/F59E0B/FFFFFF?text=R" type="image/png">
+
+
+    <style>
+        /* Custom Scrollbar (Optional, for aesthetics) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f59e0b; /* Tailwind yellow-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706; /* Tailwind yellow-600 */
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* General Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInFromLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 5px #f59e0b, 0 0 10px #f59e0b; }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px #fbbf24, 0 0 25px #fbbf24; }
+        }
+
+        /* Header Styles */
+        header.fixed {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Add a class 'scrolled' to header with JS if you want background change on scroll */
+        /* header.scrolled { background-color: rgba(255, 255, 255, 0.98); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); } */
+
+        .header-logo-container .header-logo-icon,
+        .header-logo-container .header-brand-name {
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .header-logo-container:hover .header-logo-icon {
+            transform: scale(1.1) rotate(-15deg);
+        }
+        .header-logo-container:hover .header-brand-name {
+            color: #f59e0b; /* yellow-500 */
+            transform: translateX(2px);
+        }
+
+        nav.main-nav a {
+            position: relative;
+            transition: color 0.3s ease-in-out;
+            padding-bottom: 4px; /* Space for the underline */
+        }
+        nav.main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f59e0b; /* yellow-500 */
+            transition: width 0.3s ease-in-out;
+        }
+        nav.main-nav a:hover::after {
+            width: 70%;
+        }
+        nav.main-nav a:hover {
+            color: #f59e0b; /* yellow-500 */
+        }
+
+        .contact-me-btn {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .contact-me-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.35);
+        }
+
+        .mobile-menu-btn {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+            background-color: #fef3c7; /* yellow-100 */
+        }
+        .mobile-menu-btn:active {
+            transform: rotate(90deg) scale(1.05);
+        }
+        
+        /* Mobile Navigation Menu (Basic example, can be expanded) */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none; /* Initially not interactive */
+        }
+        #mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto; /* Interactive when open */
+        }
+
+
+        /* Hero Section Styles */
+        #home .hero-text-container h1 {
+            animation: fadeInDown 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        #home .hero-text-container .hero-subtitle {
+            animation: fadeInDown 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        #home .hero-text-container .hero-location {
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+            opacity: 0;
+        }
+        #home .hero-text-container .hero-description {
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+            opacity: 0;
+        }
+        #home .hero-text-container .hero-cta-buttons a {
+            animation: fadeInUp 1s ease-out 1.1s forwards;
+            opacity: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        #home .hero-text-container .hero-cta-buttons a:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        #home .hero-image-container {
+            animation: fadeInUp 1.2s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        #home .hero-image-main-wrapper:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        #home .hero-badge-stats { /* 📊 emoji */
+            animation: pulseGlow 2.5s infinite ease-in-out, bounceUpDown 3s infinite ease-in-out 0.5s;
+        }
+        #home .hero-badge-available { /* "Available for hire" */
+            animation: pulseSlightly 3s infinite ease-in-out;
+        }
+        #home .hero-badge-excel, #home .hero-badge-mis {
+            animation: sideFloat 4s infinite ease-in-out alternate;
+        }
+        #home .hero-badge-mis { animation-delay: 0.5s; animation-direction: alternate-reverse; }
+
+        @keyframes bounceUpDown {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+        @keyframes pulseSlightly {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.85; }
+        }
+        @keyframes sideFloat {
+            0% { transform: translateX(0) translateY(-50%) rotate(-5deg); }
+            100% { transform: translateX(5px) translateY(-50%) rotate(5deg); }
+        }
+
+        /* About Me Section Styles */
+        #about .section-title h2, #about .section-title p {
+            opacity: 0; animation: fadeInDown 1s ease-out forwards;
+        }
+        #about .section-title p { animation-delay: 0.2s; }
+
+        #about .timeline-item {
+            opacity: 0;
+            animation: slideInFromLeft 0.6s ease-out forwards;
+        }
+        #about .timeline-item:nth-child(1) { animation-delay: 0.3s; }
+        #about .timeline-item:nth-child(2) { animation-delay: 0.5s; }
+        #about .timeline-item:nth-child(3) { animation-delay: 0.7s; }
+        #about .timeline-item:nth-child(4) { animation-delay: 0.9s; } /* For 4th education item */
+        
+        /* Experience items also need staggering if they are separate divs */
+        #about h3: P-2 + .space-y-6 .timeline-item:nth-child(1) { animation-delay: 0.3s; } /* Experience item 1 */
+        #about h3: P-2 + .space-y-6 .timeline-item:nth-child(2) { animation-delay: 0.5s; } /* Experience item 2 */
+
+
+        #about .timeline-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.07);
+            border-left-color: #f59e0b !important;
+        }
+         #about .timeline-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+        }
+        #about .mission-card {
+            opacity: 0; animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        /* Skills Section Styles */
+        #skills .section-title h2, #skills .section-title p {
+            opacity: 0; animation: fadeInDown 1s ease-out forwards;
+        }
+        #skills .section-title p { animation-delay: 0.2s; }
+
+        #skills .skill-category-card {
+            opacity: 0; animation: fadeInUp 0.6s ease-out forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        #skills .skill-category-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+        #skills .skill-category-card:nth-child(1) { animation-delay: 0.3s; }
+        #skills .skill-category-card:nth-child(2) { animation-delay: 0.5s; }
+        #skills .skill-category-card:nth-child(3) { animation-delay: 0.7s; }
+        #skills .skill-category-card:nth-child(4) { animation-delay: 0.9s; }
+        #skills .skill-category-card:nth-child(5) { animation-delay: 1.1s; }
+        #skills .skill-category-card:nth-child(6) { animation-delay: 1.3s; }
+
+        #skills .skill-tag {
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+        #skills .skill-tag:hover {
+            background-color: #f59e0b; /* yellow-500 */
+            color: white;
+            transform: scale(1.1);
+        }
+        #skills .proficiency-levels-card {
+            opacity: 0; animation: fadeInUp 1s ease-out 1.2s forwards;
+        }
+        #skills .proficiency-bar-fill {
+            width: 0% !important; /* Start at 0 for animation */
+            transition: width 1.5s ease-out; /* Default transition for JS trigger */
+        }
+        /* CSS-driven animation for proficiency bars on load with delay */
+        #skills .proficiency-item:nth-child(1) .proficiency-bar-fill { animation: fillTo95 1.5s 1.4s ease-out forwards; }
+        #skills .proficiency-item:nth-child(2) .proficiency-bar-fill { animation: fillTo90 1.5s 1.5s ease-out forwards; }
+        #skills .proficiency-item:nth-child(3) .proficiency-bar-fill { animation: fillTo88 1.5s 1.6s ease-out forwards; }
+        #skills .proficiency-item:nth-child(4) .proficiency-bar-fill { animation: fillTo85GAS 1.5s 1.7s ease-out forwards; }
+        #skills .proficiency-item:nth-child(5) .proficiency-bar-fill { animation: fillTo80HTML 1.5s 1.8s ease-out forwards; }
+        #skills .proficiency-item:nth-child(6) .proficiency-bar-fill { animation: fillTo85AppSheet 1.5s 1.9s ease-out forwards; }
+
+        @keyframes fillTo95 { from { width: 0%; } to { width: 95%; } }
+        @keyframes fillTo90 { from { width: 0%; } to { width: 90%; } }
+        @keyframes fillTo88 { from { width: 0%; } to { width: 88%; } }
+        @keyframes fillTo85GAS { from { width: 0%; } to { width: 85%; } }
+        @keyframes fillTo80HTML { from { width: 0%; } to { width: 80%; } }
+        @keyframes fillTo85AppSheet { from { width: 0%; } to { width: 85%; } }
+
+
+        /* Services Section Styles */
+        #services .section-title .service-badge, #services .section-title h2, #services .section-title p {
+            opacity: 0; animation: fadeInDown 1s ease-out forwards;
+        }
+        #services .section-title h2 { animation-delay: 0.1s; }
+        #services .section-title p { animation-delay: 0.2s; }
+
+        #services .service-card {
+            opacity: 0; animation: fadeInUp 0.6s ease-out forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        #services .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            background-color: white;
+        }
+        #services .service-card:nth-child(1) { animation-delay: 0.4s; }
+        #services .service-card:nth-child(2) { animation-delay: 0.6s; }
+        #services .service-card:nth-child(3) { animation-delay: 0.8s; }
+        #services .service-card:nth-child(4) { animation-delay: 1.0s; }
+        #services .service-card:nth-child(5) { animation-delay: 1.2s; } /* If there's a 5th card */
+
+
+        #services .service-card .learn-more-btn svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        #services .service-card .learn-more-btn:hover svg {
+            transform: translateX(5px) scale(1.1);
+        }
+        #services .cta-services-card {
+            opacity: 0; animation: fadeInUp 1s ease-out 1.2s forwards;
+        }
+        #services .cta-services-card .start-project-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(245, 158, 11, 0.3);
+        }
+         #services .cta-services-card .start-project-btn {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Portfolio Section Styles */
+        #portfolio .section-title h2, #portfolio .section-title p {
+            opacity: 0; animation: fadeInDown 1s ease-out forwards;
+        }
+        #portfolio .section-title p { animation-delay: 0.2s; }
+
+        #portfolio .portfolio-card {
+            opacity: 0; animation: fadeInUp 0.6s ease-out forwards;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        #portfolio .portfolio-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.1);
+        }
+        #portfolio .portfolio-card:nth-child(1) { animation-delay: 0.4s; }
+        #portfolio .portfolio-card:nth-child(2) { animation-delay: 0.6s; }
+        #portfolio .portfolio-card:nth-child(3) { animation-delay: 0.8s; }
+
+        #portfolio .portfolio-card:hover .portfolio-image {
+            filter: brightness(1.1) contrast(1.05);
+        }
+        #portfolio .portfolio-image {
+            transition: filter 0.35s ease-in-out, transform 0.35s ease-in-out; /* Keep existing group-hover:scale-105 */
+        }
+        #portfolio .portfolio-card .view-details-btn svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        #portfolio .portfolio-card .view-details-btn:hover svg {
+            transform: translateX(6px) scale(1.15);
+        }
+        #portfolio .more-projects-card {
+            opacity: 0; animation: fadeInUp 1s ease-out 1s forwards;
+        }
+        #portfolio .more-projects-card a:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        #portfolio .more-projects-card a {
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Contact Section Styles */
+        #contact .section-title h2, #contact .section-title p {
+            opacity: 0; animation: fadeInDown 1s ease-out forwards;
+        }
+        #contact .section-title p { animation-delay: 0.2s; }
+
+        #contact .contact-info-item {
+            opacity: 0; animation: slideInFromLeft 0.6s ease-out forwards;
+        }
+        #contact .contact-info-item:nth-child(1) { animation-delay: 0.4s; }
+        #contact .contact-info-item:nth-child(2) { animation-delay: 0.55s; }
+        #contact .contact-info-item:nth-child(3) { animation-delay: 0.7s; }
+        #contact .contact-info-item:nth-child(4) { animation-delay: 0.85s; }
+
+        #contact .contact-info-icon-wrapper {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        #contact .contact-info-item:hover .contact-info-icon-wrapper {
+            transform: scale(1.15) rotate(-10deg);
+            box-shadow: 0 5px 10px rgba(245, 158, 11, 0.4);
+        }
+        #contact .contact-info-item a:hover {
+            color: #d97706; /* yellow-600 */
+            text-decoration: underline;
+        }
+        #contact .why-work-with-me-card {
+            opacity: 0; animation: fadeInUp 0.8s ease-out 1s forwards;
+        }
+        #contact .contact-form-container {
+            opacity: 0; animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+        #contact .contact-form input, #contact .contact-form textarea {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #contact .contact-form input:focus, #contact .contact-form textarea:focus {
+            border-color: #f59e0b !important; /* yellow-500 */
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+        }
+        #contact .submit-form-btn {
+            transition: transform 0.2s ease-out, box-shadow 0.3s ease-out, background-position 0.5s ease;
+            background-size: 200% auto;
+            background-image: linear-gradient(to right, #f59e0b 0%, #ef4444 50%, #f59e0b 100%); /* yellow-500 to red-500 */
+        }
+        #contact .submit-form-btn:hover {
+            background-position: right center;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); /* red-500 shadow */
+        }
+        #contact .submit-form-btn:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 5px 10px rgba(239, 68, 68, 0.2);
+        }
+        #contact .submit-form-btn svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        #contact .submit-form-btn:hover svg {
+            transform: translateX(5px) rotate(15deg);
+        }
+
+        /* Footer Styles */
+        footer a.footer-link:hover {
+            color: #fbbf24; /* yellow-400 */
+            text-decoration: underline;
+            transform: scale(1.05);
+            display: inline-block;
+        }
+         footer a.footer-link{
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        footer .heart-icon {
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(0.9); }
+            20%, 40%, 60%, 80% { transform: scale(1.1); }
+            50%, 70% { transform: scale(1.05); }
+        }
+
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800">
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="flex items-center space-x-2 header-logo-container">
+                    <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center header-logo-icon">
+                        <span class="text-white font-bold text-lg">R</span>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800 header-brand-name">Rana Sutradhar</span>
+                </a>
+
+                <nav class="hidden md:flex space-x-8 main-nav">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <a href="#contact" class="hidden md:inline-flex bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full hover:shadow-lg font-medium contact-me-btn">
+                    Contact Me
+                </a>
+
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-md text-gray-600 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500 mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-2">
+            <a href="#home" class="block px-4 py-2 text-gray-600 hover:bg-yellow-50 hover:text-yellow-600">Home</a>
+            <a href="#about" class="block px-4 py-2 text-gray-600 hover:bg-yellow-50 hover:text-yellow-600">About</a>
+            <a href="#skills" class="block px-4 py-2 text-gray-600 hover:bg-yellow-50 hover:text-yellow-600">Skills</a>
+            <a href="#services" class="block px-4 py-2 text-gray-600 hover:bg-yellow-50 hover:text-yellow-600">Services</a>
+            <a href="#portfolio" class="block px-4 py-2 text-gray-600 hover:bg-yellow-50 hover:text-yellow-600">Portfolio</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-600 hover:bg-yellow-50 hover:text-yellow-600">Contact</a>
+            <a href="#contact" class="block px-4 py-3 text-center bg-yellow-400 text-white font-medium hover:bg-yellow-500 m-2 rounded-md">Contact Me</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="pt-24 pb-16 bg-gradient-to-br from-gray-50 via-white to-yellow-50/30 relative overflow-hidden min-h-screen flex items-center">
+            <div class="absolute inset-0 overflow-hidden -z-10">
+                <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/10 to-purple-500/10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                    <div class="lg:w-1/2 space-y-8 hero-text-container text-center lg:text-left">
+                        <div class="inline-flex items-center bg-gradient-to-r from-yellow-100 to-orange-100 border border-yellow-200 text-yellow-800 px-6 py-3 rounded-full text-sm font-medium shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 mr-2"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+                            Available for New Opportunities
+                        </div>
+                        <div class="space-y-4">
+                            <h1 class="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                                I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 animate-pulse">Rana</span><br>
+                                <span class="text-4xl lg:text-5xl text-gray-700 font-semibold">Sutradhar</span>
+                            </h1>
+                            <div class="flex items-center space-x-3 hero-subtitle justify-center lg:justify-start">
+                                <div class="h-1 w-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
+                                <p class="text-xl lg:text-2xl text-gray-600 font-medium">MIS Executive & Data Specialist</p>
+                            </div>
+                            <p class="text-lg text-gray-500 hero-location">Based in India 🇮🇳</p>
+                        </div>
+                        <p class="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 hero-description">
+                            Results-driven MIS Executive (MA, Advanced Excel Expert) passionate about empowering organizations with actionable insights. I specialize in transforming complex data into strategic business value through innovative dashboard design, automation, and analytics solutions.
+                        </p>
+                        <div class="flex flex-wrap gap-6 justify-center lg:justify-start">
+                            <div class="flex items-center space-x-2 text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award w-5 h-5 text-yellow-500"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg><span class="font-medium">MA Degree</span></div>
+                            <div class="flex items-center space-x-2 text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5 text-blue-500"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span class="font-medium">2+ Years Experience</span></div>
+                            <div class="flex items-center space-x-2 text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-5 h-5 text-purple-500"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg><span class="font-medium">Excel Expert</span></div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4 hero-cta-buttons justify-center lg:justify-start">
+                            <a href="#portfolio" class="group inline-flex items-center justify-center bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-4 rounded-2xl hover:from-yellow-600 hover:to-orange-600 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                View My Portfolio
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </a>
+                            <a href="#contact" class="inline-flex items-center justify-center border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-2xl hover:border-yellow-400 hover:text-yellow-600 hover:bg-yellow-50 font-semibold text-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-3 w-5 h-5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+                                Download CV
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 flex justify-center lg:justify-end hero-image-container">
+                        <div class="relative">
+                            <div class="relative w-80 h-80 lg:w-96 lg:h-96">
+                                <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-3xl transform rotate-6 shadow-2xl"></div>
+                                <div class="relative w-full h-full bg-white rounded-3xl p-3 shadow-xl transform -rotate-3 hover:rotate-0 transition-transform duration-500 hero-image-main-wrapper">
+                                    <img src="https://i.ibb.co/m5JnW72N/Rana-photoaidcom-cropped.png" alt="Rana Sutradhar - MIS Executive and Data Specialist" class="w-full h-full object-cover rounded-2xl">
+                                </div>
+                            </div>
+                            <div class="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 hero-badge-stats">
+                                <span class="text-3xl">📊</span>
+                            </div>
+                            <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl px-6 py-3 shadow-xl border border-gray-100 hero-badge-available">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                    <span class="text-sm font-semibold text-gray-700">Available for hire</span>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 -left-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl px-4 py-3 shadow-xl transform -translate-y-1/2 hero-badge-excel">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold">Excel</div>
+                                    <div class="text-xs opacity-90">Expert</div>
+                                </div>
+                            </div>
+                             <div class="absolute top-1/4 -right-8 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl px-4 py-3 shadow-xl hero-badge-mis">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold">MIS</div>
+                                    <div class="text-xs opacity-90">Specialist</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 section-title">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Results-driven MIS Executive (MA, Advanced Excel Expert) passionate about empowering organizations with actionable insights. I specialize in transforming complex data into strategic business value through innovative dashboard design, automation, and analytics solutions.
+                    </p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap mr-3 text-yellow-500"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+                            Education
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="relative pl-8 border-l-2 border-yellow-200 hover:border-yellow-400 transition-colors timeline-item">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="bg-gray-50 rounded-lg p-6 hover:bg-yellow-50 transition-colors timeline-card">
+                                    <h4 class="font-semibold text-gray-900 text-lg">Post Graduation (MA)</h4>
+                                    <p class="text-gray-600 font-medium">Cooch Behar Panchanan Barma University</p>
+                                    <p class="text-yellow-600 font-semibold text-sm mt-1">2023</p>
+                                </div>
+                            </div>
+                            <div class="relative pl-8 border-l-2 border-yellow-200 hover:border-yellow-400 transition-colors timeline-item">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="bg-gray-50 rounded-lg p-6 hover:bg-yellow-50 transition-colors timeline-card">
+                                    <h4 class="font-semibold text-gray-900 text-lg">Graduation</h4>
+                                    <p class="text-gray-600 font-medium">Mathabhanga College</p>
+                                    <p class="text-yellow-600 font-semibold text-sm mt-1">2021</p>
+                                </div>
+                            </div>
+                             <div class="relative pl-8 border-l-2 border-yellow-200 hover:border-yellow-400 transition-colors timeline-item">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="bg-gray-50 rounded-lg p-6 hover:bg-yellow-50 transition-colors timeline-card">
+                                    <h4 class="font-semibold text-gray-900 text-lg">Higher Secondary</h4>
+                                    <p class="text-gray-600 font-medium">Nagar Dakali Ganj High School</p>
+                                    <p class="text-yellow-600 font-semibold text-sm mt-1">2018</p>
+                                </div>
+                            </div>
+                             <div class="relative pl-8 border-l-2 border-yellow-200 hover:border-yellow-400 transition-colors timeline-item">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="bg-gray-50 rounded-lg p-6 hover:bg-yellow-50 transition-colors timeline-card">
+                                    <h4 class="font-semibold text-gray-900 text-lg">Secondary</h4>
+                                    <p class="text-gray-600 font-medium">Shibpur High School</p>
+                                    <p class="text-yellow-600 font-semibold text-sm mt-1">2016</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase mr-3 text-yellow-500"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+                            Experience
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="relative pl-8 border-l-2 border-yellow-200 hover:border-yellow-400 transition-colors timeline-item">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="bg-gray-50 rounded-lg p-6 hover:bg-yellow-50 transition-colors timeline-card">
+                                    <h4 class="font-semibold text-gray-900 text-lg">MIS Executive</h4>
+                                    <p class="text-gray-600 font-medium">Build Wealth Realtors</p>
+                                    <p class="text-yellow-600 font-semibold text-sm mt-1 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4 mr-1"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                        Jan 2025 – Present
+                                    </p>
+                                    <p class="text-gray-600 text-sm mt-2">Leading MIS operations and data management initiatives</p>
+                                </div>
+                            </div>
+                            <div class="relative pl-8 border-l-2 border-yellow-200 hover:border-yellow-400 transition-colors timeline-item">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-400 rounded-full"></div>
+                                <div class="bg-gray-50 rounded-lg p-6 hover:bg-yellow-50 transition-colors timeline-card">
+                                    <h4 class="font-semibold text-gray-900 text-lg">MIS Executive</h4>
+                                    <p class="text-gray-600 font-medium">Tulsa Group</p>
+                                    <p class="text-yellow-600 font-semibold text-sm mt-1 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4 mr-1"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                                        Feb 2024 – July 2024
+                                    </p>
+                                    <p class="text-gray-600 text-sm mt-2">Implemented data analysis solutions and automation systems</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-8 text-center mission-card">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">My Mission</h3>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">To leverage my advanced Excel mastery and MIS expertise to deliver innovative data solutions that drive business growth and operational efficiency. I am committed to continuous professional growth and dedicated to contributing to team success through analytical excellence and automation expertise.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 section-title">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive skill set focused on delivering effective MIS solutions and driving data-driven decision making.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 skill-category-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column w-6 h-6 text-white"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg></div>
+                            <h3 class="text-xl font-semibold text-gray-900">Data Analysis</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Expert in transforming raw data into meaningful insights and actionable reports.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Advanced Excel</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Data Visualization</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Statistical Analysis</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Reporting</span>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 skill-category-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard w-6 h-6 text-white"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+                            <h3 class="text-xl font-semibold text-gray-900">Dashboard Creation</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Creating interactive dashboards that provide real-time business intelligence.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Excel Dashboards</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Google Sheets</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Data Automation</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">KPI Tracking</span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 skill-category-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2 w-6 h-6 text-white"><path d="M10 9.5 8 12l2 2.5"></path><path d="M14 9.5 16 12l-2 2.5"></path></svg></div>
+                            <h3 class="text-xl font-semibold text-gray-900">Programming</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Developing custom solutions and automations using modern web technologies.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Google Apps Script</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">HTML</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">CSS</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 skill-category-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-spreadsheet w-6 h-6 text-white"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M8 13h2"></path><path d="M14 13h2"></path><path d="M8 17h2"></path><path d="M14 17h2"></path></svg></div>
+                            <h3 class="text-xl font-semibold text-gray-900">Office Suite</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Mastery of productivity tools for efficient business operations.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Office 365</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">PowerPoint</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Google Slides</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Advanced Excel</span>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 skill-category-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone w-6 h-6 text-white"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">App Development</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Building custom applications without traditional coding using modern platforms.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">AppSheet</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">No-Code Solutions</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Mobile Apps</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Workflow Automation</span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 skill-category-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain w-6 h-6 text-white"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path></svg></div>
+                            <h3 class="text-xl font-semibold text-gray-900">AI Tools</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Leveraging artificial intelligence to enhance productivity and decision-making.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">AI Integration</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Automation</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Process Optimization</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium skill-tag">Smart Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-sm proficiency-levels-card">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Proficiency Levels</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center">
+                        <div class="flex flex-col items-center">
+                            <div class="relative w-24 h-24 mb-3">
+                                <svg class="w-24 h-24" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="42" stroke="#FDE68A" stroke-width="10" fill="none" />
+                                    <circle cx="50" cy="50" r="42" stroke="#F59E42" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="13.2" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                </svg>
+                                <span class="absolute inset-0 flex items-center justify-center text-xl font-bold text-yellow-600">95%</span>
+                            </div>
+                            <span class="font-medium text-gray-700 text-center">Excel Mastery</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="relative w-24 h-24 mb-3">
+                                <svg class="w-24 h-24" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="42" stroke="#FDE68A" stroke-width="10" fill="none" />
+                                    <circle cx="50" cy="50" r="42" stroke="#F59E42" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="26.4" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                </svg>
+                                <span class="absolute inset-0 flex items-center justify-center text-xl font-bold text-yellow-600">90%</span>
+                            </div>
+                            <span class="font-medium text-gray-700 text-center">Data Analysis</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="relative w-24 h-24 mb-3">
+                                <svg class="w-24 h-24" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="42" stroke="#FDE68A" stroke-width="10" fill="none" />
+                                    <circle cx="50" cy="50" r="42" stroke="#F59E42" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="31.68" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                </svg>
+                                <span class="absolute inset-0 flex items-center justify-center text-xl font-bold text-yellow-600">88%</span>
+                            </div>
+                            <span class="font-medium text-gray-700 text-center">Dashboard Creation</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="relative w-24 h-24 mb-3">
+                                <svg class="w-24 h-24" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="42" stroke="#FDE68A" stroke-width="10" fill="none" />
+                                    <circle cx="50" cy="50" r="42" stroke="#F59E42" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="39.6" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                </svg>
+                                <span class="absolute inset-0 flex items-center justify-center text-xl font-bold text-yellow-600">85%</span>
+                            </div>
+                            <span class="font-medium text-gray-700 text-center">Google Apps Script</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="relative w-24 h-24 mb-3">
+                                <svg class="w-24 h-24" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="42" stroke="#FDE68A" stroke-width="10" fill="none" />
+                                    <circle cx="50" cy="50" r="42" stroke="#F59E42" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="52.8" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                </svg>
+                                <span class="absolute inset-0 flex items-center justify-center text-xl font-bold text-yellow-600">80%</span>
+                            </div>
+                            <span class="font-medium text-gray-700 text-center">HTML/CSS/JavaScript</span>
+                        </div>
+                         <div class="flex flex-col items-center">
+                            <div class="relative w-24 h-24 mb-3">
+                                <svg class="w-24 h-24" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="42" stroke="#FDE68A" stroke-width="10" fill="none" />
+                                    <circle cx="50" cy="50" r="42" stroke="#F59E42" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="39.6" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                                </svg>
+                                <span class="absolute inset-0 flex items-center justify-center text-xl font-bold text-yellow-600">85%</span>
+                            </div>
+                            <span class="font-medium text-gray-700 text-center">AppSheet Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 section-title">
+                    <div class="inline-flex items-center bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium mb-6 service-badge">Services</div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Services I Provide</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive MIS solutions tailored to your business needs, leveraging cutting-edge tools and methodologies.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg border border-transparent hover:border-yellow-200 group service-card">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-big w-8 h-8 text-white"><line x1="12" x2="12" y1="20" y2="4"></line><path d="M6 20v-6a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v6Z"></path><path d="M18 20v-8a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v8Z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Data Analysis & Reporting</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Transform your raw data into meaningful insights with comprehensive analysis and professional reporting solutions.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Statistical Analysis</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Trend Identification</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Custom Reports</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Data Visualization</li>
+                        </ul>
+                        <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group learn-more-btn">Learn more<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                    </div>
+                     <div class="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg border border-transparent hover:border-yellow-200 group service-card">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard w-8 h-8 text-white"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Custom Dashboard Creation</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Design and develop interactive dashboards that provide real-time business intelligence and KPI tracking.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Excel Dashboards</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Real-time Updates</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Interactive Charts</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Performance Metrics</li>
+                        </ul>
+                        <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group learn-more-btn">Learn more<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg border border-transparent hover:border-yellow-200 group service-card">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2 w-8 h-8 text-white"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Excel & Google Sheets Automation</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Streamline your data processes with automated solutions in Excel and Google Sheets.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Macro Development</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Formula Optimization</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Process Automation</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Data Validation</li>
+                        </ul>
+                        <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group learn-more-btn">Learn more<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg border border-transparent hover:border-yellow-200 group service-card">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2 w-8 h-8 text-white"><path d="M10 9.5 8 12l2 2.5"></path><path d="M14 9.5 16 12l-2 2.5"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Google Apps Script Development</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Custom automation solutions and integrations using Google Apps Script for enhanced productivity.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Workflow Automation</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>API Integrations</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Custom Functions</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Email Automation</li>
+                        </ul>
+                        <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group learn-more-btn">Learn more<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                    </div>
+                     <div class="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg border border-transparent hover:border-yellow-200 group service-card">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone-cog w-8 h-8 text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10"></path><path d="M12 18h.01"></path><path d="M22 12.5V12a2 2 0 0 0-2-2H18"></path><path d="m19 9-1.5 1.5"></path><path d="m15 13.5-1.5-1.5"></path><path d="M22 12.5V13a2 2 0 0 1-2 2h-2"></path><path d="m19 16 1.5-1.5"></path><path d="m15 11.5 1.5 1.5"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">AppSheet Application Design</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Build powerful no-code applications using AppSheet for mobile and web platforms.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Mobile Apps</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Database Integration</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>Workflow Management</li>
+                            <li class="flex items-center text-sm text-gray-600"><div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>User-friendly Interface</li>
+                        </ul>
+                        <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group learn-more-btn">Learn more<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                    </div>
+                </div>
+                <div class="text-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-8 cta-services-card">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Ready to Get Started?</h3>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Let's discuss your project requirements and how I can help you achieve your goals with innovative MIS solutions.</p>
+                    <a href="#contact" class="inline-flex items-center bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-3 rounded-full hover:shadow-lg font-medium start-project-btn">
+                        Start a Project
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-5 h-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 section-title">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Portfolio</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Currently working on exciting projects that showcase my expertise in MIS solutions and data analytics.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 group portfolio-card">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Advanced Excel Dashboard Suite" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image">
+                            <div class="absolute top-4 left-4 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                In Progress
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Advanced Excel Dashboard Suite</h3>
+                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">Comprehensive dashboard solutions for real-time business analytics and KPI tracking.</p>
+                            <div class="mb-4">
+                                <p class="text-yellow-600 text-sm font-medium">Expected completion in 2-3 months</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Excel</span>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">VBA</span>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Power Query</span>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Charts</span>
+                            </div>
+                            <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group text-sm view-details-btn">View Details<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 group portfolio-card">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Google Apps Script Automation Platform" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image">
+                             <div class="absolute top-4 left-4 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                In Progress
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Google Apps Script Automation Platform</h3>
+                            <p class="text-gray-600 text-sm mb-4 leading-relaxed">Custom automation solutions integrating multiple Google Workspace applications.</p>
+                             <div class="mb-4">
+                                <p class="text-yellow-600 text-sm font-medium">Expected completion in 3 months</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Google Apps Script</span>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">JavaScript</span>
+                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">API Integration</span>
+                            </div>
+                            <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group text-sm view-details-btn">View Details<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 hover:border-yellow-200 group portfolio-card">
+    <div class="relative overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop" alt="AppSheet Mobile Application" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image">
+        <div class="absolute top-4 left-4 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            In Progress
+        </div>
+    </div>
+    <div class="p-6">
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">AppSheet Mobile Application</h3>
+        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+            A custom Sales CRM mobile app designed for real estate (Realtor) companies. Enables agents to manage leads, track sales targets, automate follow-ups, and monitor deal pipelines on the go. Built with AppSheet for rapid deployment and seamless integration with Google Sheets.
+        </p>
+        <div class="mb-4">
+            <p class="text-yellow-600 text-sm font-medium">Expected completion in 2 months</p>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">AppSheet</span>
+            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Sales CRM</span>
+            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Real Estate</span>
+            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Google Sheets</span>
+            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs skill-tag">Mobile Development</span>
+        </div>
+        <button class="text-yellow-600 font-medium flex items-center hover:text-yellow-700 transition-colors group text-sm view-details-btn">
+            View Details
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </button>
+    </div>
+</div>
+                </div>
+                <div class="text-center bg-white rounded-2xl p-8 shadow-sm more-projects-card">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">More Projects Coming Soon</h3>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">I'm actively working on several innovative projects that will be showcased here upon completion. Each project demonstrates my commitment to delivering high-quality MIS solutions and data-driven results.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#contact" class="inline-flex items-center bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-full hover:shadow-lg font-medium">Discuss Your Project</a>
+                        <a href="#services" class="inline-flex items-center border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-full hover:border-yellow-400 hover:text-yellow-500 font-medium">View Services</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 section-title">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Contact Me</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Ready to discuss your project? Let's connect and explore how I can help you achieve your goals.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-8">Get in Touch</h3>
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-center group contact-info-item">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4 contact-info-icon-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-6 h-6 text-white"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">Email</p>
+                                    <a href="mailto:ranasutradhar@outlook.in" class="text-gray-900 font-semibold hover:text-yellow-600 transition-colors">ranasutradhar@outlook.in</a>
+                                </div>
+                            </div>
+                             <div class="flex items-center group contact-info-item">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4 contact-info-icon-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-6 h-6 text-white"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">Phone</p>
+                                    <a href="tel:+919382408692" class="text-gray-900 font-semibold hover:text-yellow-600 transition-colors">+91 9382408692</a>
+                                </div>
+                            </div>
+                             <div class="flex items-center group contact-info-item">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4 contact-info-icon-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-6 h-6 text-white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">LinkedIn</p>
+                                    <a href="https://www.linkedin.com/in/rana-sutradhar-0367931bb/" target="_blank" rel="noopener noreferrer" class="text-gray-900 font-semibold hover:text-yellow-600 transition-colors">Connect with me</a>
+                                </div>
+                            </div>
+                             <div class="flex items-center group contact-info-item">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4 contact-info-icon-wrapper">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-6 h-6 text-white"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 text-sm font-medium">Location</p>
+                                    <p class="text-gray-900 font-semibold">India</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 why-work-with-me-card">
+                            <h4 class="font-semibold text-gray-900 mb-2">Why Work With Me?</h4>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li>• Advanced Excel mastery and MIS expertise</li>
+                                <li>• Proven track record in data analysis and automation</li>
+                                <li>• Dedicated to continuous professional growth</li>
+                                <li>• Committed to delivering exceptional results</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <form class="space-y-6 contact-form">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300" placeholder="Your name">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300" placeholder="your.email@example.com">
+                                </div>
+                            </div>
+                             <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Contact no:</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300" placeholder="Your contact number (optional)">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300" placeholder="Project inquiry">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" required rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300 resize-none" placeholder="Tell me about your project requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-4 rounded-lg hover:shadow-lg font-medium flex items-center justify-center group submit-form-btn">
+                                Send Message
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send ml-2 w-5 h-5"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">R</span>
+                        </div>
+                        <span class="text-xl font-bold">Rana Sutradhar</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">Dynamic MIS Executive passionate about transforming data into actionable insights and driving organizational success through innovative solutions.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 footer-link">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 footer-link">About</a></li>
+                        <li><a href="#skills" class="text-gray-400 footer-link">Skills</a></li>
+                        <li><a href="#services" class="text-gray-400 footer-link">Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 footer-link">Portfolio</a></li>
+                        <li><a href="#contact" class="text-gray-400 footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-3">
+                        <a href="mailto:ranasutradhar@outlook.in" class="flex items-center text-gray-400 footer-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-4 h-4 mr-3"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                            ranasutradhar@outlook.in
+                        </a>
+                        <a href="tel:+919382408692" class="flex items-center text-gray-400 footer-link">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 mr-3"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +91 9382408692
+                        </a>
+                         <a href="https://www.linkedin.com/in/rana-sutradhar-0367931bb/" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-400 footer-link">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-4 h-4 mr-3"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Rana Sutradhar. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm flex items-center">Made with 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4 mx-1 text-red-500 heart-icon"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> 
+                        for excellence in MIS solutions
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            // Optional: Change menu icon to close icon
+            if (mobileMenu.classList.contains('open')) {
+                menuToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            } else {
+                menuToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>`;
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                 menuToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>`;
+            });
+        });
+
+        // Optional: Add 'scrolled' class to header on scroll for background change
+        // window.addEventListener('scroll', () => {
+        //     const header = document.querySelector('header.fixed');
+        //     if (window.scrollY > 50) {
+        //         header.classList.add('scrolled');
+        //     } else {
+        //         header.classList.remove('scrolled');
+        //     }
+        // });
+
+        // Contact Form Submission (Basic example, prevent default and log)
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const phone = formData.get('phone'); // Get phone number
+                const subject = formData.get('subject');
+                const message = formData.get('message');
+
+                console.log('Form Submitted:');
+                console.log('Name:', name);
+                console.log('Email:', email);
+                console.log('Phone:', phone); // Log phone number
+                console.log('Subject:', subject);
+                console.log('Message:', message);
+                
+                // Create a custom notification
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = '#28a745'; // Green for success
+                notification.style.color = 'white';
+                notification.style.padding = '15px 20px';
+                notification.style.borderRadius = '8px';
+                notification.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+                notification.style.zIndex = '10000';
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                notification.style.transform = 'translateY(20px)';
+                notification.textContent = `Thank you, ${name}! Your message has been "sent".`;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateY(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 5000);
+
+
+                this.reset(); // Clear the form
+            });
+        }
+
+    </script>
+</body>
+</html>
