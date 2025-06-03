@@ -400,24 +400,28 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); /* primary-DEFAULT shadow */
         }
         #contact .submit-form-btn {
-            transition: transform 0.2s ease-out, box-shadow 0.3s ease-out, background-position 0.5s ease;
+            transition: transform 0.2s ease-out, box-shadow 0.3s ease-out, background-position 0.5s ease, background-color 0.3s ease, opacity 0.3s ease;
             background-size: 200% auto;
             /* Updated gradient to primary and accent */
             background-image: linear-gradient(to right, #2563eb 0%, #6366f1 50%, #2563eb 100%); 
         }
-        #contact .submit-form-btn:hover {
+        #contact .submit-form-btn:hover:not(:disabled) {
             background-position: right center;
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); /* accent-DEFAULT shadow */
         }
-        #contact .submit-form-btn:active {
+        #contact .submit-form-btn:active:not(:disabled) {
             transform: translateY(-1px) scale(0.98);
             box-shadow: 0 5px 10px rgba(99, 102, 241, 0.2); /* accent-DEFAULT shadow */
+        }
+        #contact .submit-form-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
         #contact .submit-form-btn svg {
             transition: transform 0.3s ease-in-out;
         }
-        #contact .submit-form-btn:hover svg {
+        #contact .submit-form-btn:hover:not(:disabled) svg {
             transform: translateX(5px) rotate(15deg);
         }
 
@@ -441,175 +445,157 @@
             20%, 40%, 60%, 80% { transform: scale(1.1); }
             50%, 70% { transform: scale(1.05); }
         }
+        
+        /* Notification Style */
+        .form-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+        .form-notification.success {
+            background-color: #2563eb; /* primary-DEFAULT */
+        }
+        .form-notification.error {
+            background-color: #ef4444; /* red-500 */
+        }
+        .form-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        /* The :root variables are already defined in the original file.
-          The tailwind.config.js also defines primary, accent, background.
-          The key is to USE these in the HTML classes or ensure Tailwind generates
-          utilities for them if used directly like `bg-primary`.
-          For simplicity and directness, I'll replace specific color utils (like bg-yellow-400)
-          with the new theme's specific color utils (like bg-blue-600 or bg-primary).
-        */
 
         /* Mobile-first improvements for better UX on small screens */
-@media (max-width: 640px) {
-  header {
-    padding: 0.5rem 0;
-  }
-  .hero-text-container {
-    padding-top: 1.5rem;
-    gap: 1.5rem;
-  }
-  .hero-image-container {
-    margin-top: 2rem;
-    justify-content: center !important;
-  }
-  .hero-image-main-wrapper {
-    padding: 0.5rem !important;
-    min-width: 180px;
-    min-height: 180px;
-    max-width: 220px;
-    max-height: 220px;
-  }
-  .hero-badge-stats,
-  .hero-badge-available,
-  .hero-badge-excel,
-  .hero-badge-mis {
-    display: none !important;
-  }
-  h1 {
-    font-size: 2.1rem !important;
-    line-height: 2.5rem !important;
-  }
-  .hero-subtitle p,
-  .hero-description {
-    font-size: 1rem !important;
-  }
-  .section-title h2 {
-    font-size: 1.5rem !important;
-  }
-  .section-title p {
-    font-size: 1rem !important;
-  }
-  .skill-category-card,
-  .service-card,
-  .portfolio-card {
-    padding: 1.25rem !important;
-    min-width: 0;
-  }
-  .proficiency-levels-card .grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 1.5rem !important;
-  }
-  .proficiency-levels-card .w-24.h-24 {
-    width: 72px !important;
-    height: 72px !important;
-  }
-  .mission-card,
-  .cta-services-card {
-    padding: 1.5rem !important;
-    font-size: 1rem !important;
-  }
-  .timeline-card {
-    padding: 1rem !important;
-  }
-  .learn-more-btn,
-  .start-project-btn,
-  .hero-cta-buttons a {
-    width: 100%;
-    font-size: 1rem !important;
-    padding: 1rem 0.5rem !important;
-    border-radius: 1rem !important;
-  }
-  .hero-cta-buttons {
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-  }
-  .skill-tag {
-    font-size: 0.85rem !important;
-    padding: 0.25rem 0.75rem !important;
-  }
-  .grid,
-  .md\:grid-cols-2,
-  .lg\:grid-cols-3 {
-    grid-template-columns: 1fr !important;
-  }
-  .container {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-  }
-  .contact-section {
-    flex-direction: column !important;
-    gap: 2rem !important;
-  }
-  .contact-form,
-  .contact-info {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-}
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem !important;
-    line-height: 2rem !important;
-  }
-  .hero-image-main-wrapper {
-    min-width: 120px;
-    min-height: 120px;
-    max-width: 150px;
-    max-height: 150px;
-  }
-  .proficiency-levels-card .w-24.h-24 {
-    width: 56px !important;
-    height: 56px !important;
-  }
-}
+        @media (max-width: 640px) {
+          header {
+            padding: 0.5rem 0;
+          }
+          .hero-text-container {
+            padding-top: 1.5rem;
+            gap: 1.5rem;
+          }
+          .hero-image-container {
+            margin-top: 2rem;
+            justify-content: center !important;
+          }
+          .hero-image-main-wrapper {
+            padding: 0.5rem !important;
+            min-width: 180px;
+            min-height: 180px;
+            max-width: 220px;
+            max-height: 220px;
+          }
+          .hero-badge-stats,
+          .hero-badge-available,
+          .hero-badge-excel,
+          .hero-badge-mis {
+            display: none !important;
+          }
+          h1 {
+            font-size: 2.1rem !important;
+            line-height: 2.5rem !important;
+          }
+          .hero-subtitle p,
+          .hero-description {
+            font-size: 1rem !important;
+          }
+          .section-title h2 {
+            font-size: 1.5rem !important;
+          }
+          .section-title p {
+            font-size: 1rem !important;
+          }
+          .skill-category-card,
+          .service-card,
+          .portfolio-card {
+            padding: 1.25rem !important;
+            min-width: 0;
+          }
+          .proficiency-levels-card .grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .proficiency-levels-card .w-24.h-24 {
+            width: 72px !important;
+            height: 72px !important;
+          }
+          .mission-card,
+          .cta-services-card {
+            padding: 1.5rem !important;
+            font-size: 1rem !important;
+          }
+          .timeline-card {
+            padding: 1rem !important;
+          }
+          .learn-more-btn,
+          .start-project-btn,
+          .hero-cta-buttons a {
+            width: 100%;
+            font-size: 1rem !important;
+            padding: 1rem 0.5rem !important;
+            border-radius: 1rem !important;
+          }
+          .hero-cta-buttons {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+          .skill-tag {
+            font-size: 0.85rem !important;
+            padding: 0.25rem 0.75rem !important;
+          }
+          .grid,
+          .md\:grid-cols-2,
+          .lg\:grid-cols-3 {
+            grid-template-columns: 1fr !important;
+          }
+          .container {
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+          }
+          .contact-section { /* This class was not found, assuming it's the parent of contact-form and contact-info */
+            flex-direction: column !important;
+            gap: 2rem !important;
+          }
+          /* Targeting the parent of .contact-form-container and .contact-info-item's parent */
+          #contact > .container > .grid { /* Be more specific if needed */
+             flex-direction: column !important;
+             gap: 2rem !important;
+          }
+          .contact-form-container, /* Assuming .contact-form is inside this */
+          .contact-form-container + div, /* Assuming contact-info is the sibling after form container */
+          #contact .space-y-6.mb-8 + .bg-gradient-to-r /* Targeting why-work-with-me relative to contact-info items */
+           {
+            width: 100% !important;
+            min-width: 0 !important;
+          }
+        }
+        @media (max-width: 480px) {
+          h1 {
+            font-size: 1.5rem !important;
+            line-height: 2rem !important;
+          }
+          .hero-image-main-wrapper {
+            min-width: 120px;
+            min-height: 120px;
+            max-width: 150px;
+            max-height: 150px;
+          }
+          .proficiency-levels-card .w-24.h-24 {
+            width: 56px !important;
+            height: 56px !important;
+          }
+        }
     </style>
 </head>
 
 <body class="font-sans antialiased text-textBase bg-background">
-<style>
-  @media (max-width: 640px) {
-    .hero-text-container { padding-top: 1.5rem; }
-    .hero-image-container { margin-top: 2rem; }
-    .hero-image-main-wrapper { padding: 0.5rem !important; }
-    .hero-badge-stats, .hero-badge-available, .hero-badge-excel, .hero-badge-mis {
-      position: static !important;
-      margin: 0.5rem 0;
-      transform: none !important;
-      left: 0 !important;
-      right: 0 !important;
-      top: 0 !important;
-      bottom: 0 !important;
-    }
-    .hero-image-container > div { width: 100% !important; height: auto !important; }
-    .section-title h2 { font-size: 2rem !important; }
-    .section-title p { font-size: 1rem !important; }
-    .timeline-item { padding-left: 1.5rem !important; }
-    .timeline-card { padding: 1rem !important; }
-    .mission-card, .cta-services-card { padding: 1.5rem !important; }
-    .proficiency-levels-card .grid { grid-template-columns: 1fr 1fr !important; gap: 1.5rem !important; }
-    .proficiency-levels-card .w-24, .proficiency-levels-card .h-24 { width: 4.5rem !important; height: 4.5rem !important; }
-    .skill-category-card { padding: 1rem !important; }
-    .portfolio-card, .service-card { padding: 1rem !important; }
-    .portfolio-card, .service-card { min-width: 0; width: 100% !important; }
-    .contact-form { padding: 0 !important; }
-    .contact-form input, .contact-form textarea { font-size: 1rem !important; padding: 0.75rem !important; }
-    .contact-info { margin-top: 2rem !important; }
-    .grid, .lg\:grid-cols-2, .md\:grid-cols-2, .lg\:grid-cols-3 { grid-template-columns: 1fr !important; }
-    .flex-row, .lg\:flex-row { flex-direction: column !important; }
-    .gap-12, .gap-8 { gap: 1.5rem !important; }
-    .px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
-    .py-20 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
-    .pt-24 { padding-top: 5rem !important; }
-    .pb-16 { padding-bottom: 2.5rem !important; }
-    .rounded-2xl, .rounded-3xl, .rounded-xl { border-radius: 1rem !important; }
-    .text-5xl, .lg\:text-7xl { font-size: 2.25rem !important; }
-    .text-4xl, .lg\:text-5xl { font-size: 1.5rem !important; }
-    .text-xl, .lg\:text-2xl { font-size: 1.125rem !important; }
-    .text-lg, .lg\:text-xl { font-size: 1rem !important; }
-    .hero-cta-buttons a, .start-project-btn { width: 100% !important; justify-content: center !important; }
-  }
-</style>
 <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
@@ -691,7 +677,7 @@
                             <div class="relative w-80 h-80 lg:w-96 lg:h-96">
                                 <div class="absolute inset-0 bg-gradient-to-br from-primary via-accent to-blue-400 rounded-3xl transform rotate-6 shadow-2xl"></div>
                                 <div class="relative w-full h-full bg-white rounded-3xl p-3 shadow-xl transform -rotate-3 hover:rotate-0 transition-transform duration-500 hero-image-main-wrapper">
-                                    <img src="https://i.ibb.co/m5JnW72N/Rana-photoaidcom-cropped.png" alt="Rana Sutradhar - MIS Executive and Data Specialist" class="w-full h-full object-cover rounded-2xl">
+                                    <img src="https://i.ibb.co/m5JnW72N/Rana-photoaidcom-cropped.png" alt="Rana Sutradhar - MIS Executive and Data Specialist" class="w-full h-full object-cover rounded-2xl" onerror="this.onerror=null; this.src='https://placehold.co/300x300/E0E7FF/1F2937?text=Rana+S.';">
                                 </div>
                             </div>
                             <div class="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 hero-badge-stats">
@@ -1036,7 +1022,7 @@
                             <li class="flex items-center text-sm text-textMuted"><div class="w-2 h-2 bg-primary rounded-full mr-3"></div>Database Integration</li>
                             <li class="flex items-center text-sm text-textMuted"><div class="w-2 h-2 bg-primary rounded-full mr-3"></div>Workflow Management</li>
                             <li class="flex items-center text-sm text-textMuted"><div class="w-2 h-2 bg-primary rounded-full mr-3"></div>User-friendly Interface</li>
-                        </div>
+                        </ul>
                         <button class="text-primary font-medium flex items-center hover:text-primary-dark transition-colors group learn-more-btn">Learn more<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
                     </div>
                 </div>
@@ -1059,7 +1045,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 hover:border-primary-light group portfolio-card">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Advanced Excel Dashboard Suite" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Advanced Excel Dashboard Suite" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/E0E7FF/1F2937?text=Project+1';">
                             <div class="absolute top-4 left-4 bg-blue-100 text-primary-dark px-3 py-1 rounded-full text-xs font-medium flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                                 In Progress
@@ -1082,7 +1068,7 @@
                     </div>
                      <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 hover:border-primary-light group portfolio-card">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Google Apps Script Automation Platform" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Google Apps Script Automation Platform" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/E0E7FF/1F2937?text=Project+2';">
                              <div class="absolute top-4 left-4 bg-blue-100 text-primary-dark px-3 py-1 rounded-full text-xs font-medium flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                                 In Progress
@@ -1104,7 +1090,7 @@
                     </div>
                      <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 hover:border-primary-light group portfolio-card">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop" alt="AppSheet Mobile Application" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop" alt="AppSheet Mobile Application" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 portfolio-image" onerror="this.onerror=null; this.src='https://placehold.co/600x400/E0E7FF/1F2937?text=Project+3';">
                             <div class="absolute top-4 left-4 bg-blue-100 text-primary-dark px-3 py-1 rounded-full text-xs font-medium flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                                 In Progress
@@ -1149,9 +1135,7 @@
                     <h2 class="text-4xl font-bold text-textBase mb-4">Contact Me</h2>
                     <p class="text-lg text-textMuted max-w-2xl mx-auto">Ready to discuss your project? Let's connect and explore how I can help you achieve your goals.</p>
                 </div>
-                <div class="grid lg:grid-cols-2 gap-12 items-start">
-                    <div>
-                        <h3 class="text-2xl font-bold text-textBase mb-8">Get in Touch</h3>
+                <div class="grid lg:grid-cols-2 gap-12 items-start"> <div> <h3 class="text-2xl font-bold text-textBase mb-8">Get in Touch</h3>
                         <div class="space-y-6 mb-8">
                             <div class="flex items-center group contact-info-item">
                                 <div class="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mr-4 contact-info-icon-wrapper">
@@ -1200,8 +1184,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="contact-form-container">
-                        <form class="space-y-6 contact-form">
+                    <div class="contact-form-container"> <form class="space-y-6 contact-form">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label for="name" class="block text-textMuted font-medium mb-2">Full Name</label>
@@ -1310,46 +1293,91 @@
 
         // Contact Form Submission
         const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(event) {
+        const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+        const apiEndpoint = 'https://script.google.com/macros/s/AKfycbyg6qPTX7hKusJrYKpjS_ie7nzbWPyL8V52Du0fpJlL3mXiy0QuAsjZcOA4G6hti4c-/exec';
+
+        function showNotification(message, type = 'success') {
+            // Remove any existing notification
+            const existingNotification = document.querySelector('.form-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `form-notification ${type}`; // Added type for error/success styling
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100); // Delay to allow CSS transition
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                       document.body.removeChild(notification);
+                    }
+                }, 500); // Delay for fade out before removing
+            }, 5000); // Notification visible for 5 seconds
+        }
+
+
+        if (contactForm && submitButton) {
+            contactForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
                 const formData = new FormData(this);
-                const name = formData.get('name');
-                // ... (rest of your form data retrieval) ...
-                
-                // Custom notification
-                const notification = document.createElement('div');
-                notification.style.position = 'fixed';
-                notification.style.bottom = '20px';
-                notification.style.right = '20px';
-                notification.style.backgroundColor = '#2563eb'; // primary-DEFAULT for success
-                notification.style.color = 'white';
-                notification.style.padding = '15px 20px';
-                notification.style.borderRadius = '8px';
-                notification.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-                notification.style.zIndex = '10000';
-                notification.style.opacity = '0';
-                notification.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                notification.style.transform = 'translateY(20px)';
-                notification.textContent = `Thank you, ${name}! Your message has been "sent".`; // Keep "sent" in quotes as it's a mock
-                document.body.appendChild(notification);
+                const formProps = Object.fromEntries(formData);
 
-                setTimeout(() => {
-                    notification.style.opacity = '1';
-                    notification.style.transform = 'translateY(0)';
-                }, 100);
-                
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    notification.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        if (document.body.contains(notification)) { // Check if still child
-                           document.body.removeChild(notification);
-                        }
-                    }, 500);
-                }, 5000);
+                // Construct the payload for the Apps Script
+                // The Apps Script doPost defaults to create if 'action' is not present
+                const payload = {
+                    name: formProps.name,
+                    email: formProps.email,
+                    phone: formProps.phone || "", // Optional field
+                    subject: formProps.subject,
+                    message: formProps.message
+                };
 
-                this.reset();
+                try {
+                    const response = await fetch(apiEndpoint, {
+                        method: 'POST',
+                        // Apps Script in 'Standalone' or 'Bound to Sheet' mode with doPost(e)
+                        // often expects 'text/plain' for e.postData.contents when parsing JSON.
+                        // However, sending as 'application/json' and parsing on the script side is more standard.
+                        // If issues arise, try 'text/plain' and ensure Apps Script JSON.parse(e.postData.contents).
+                        headers: {
+                            'Content-Type': 'text/plain;charset=utf-8', // Important for Apps Script to receive as e.postData.contents
+                        },
+                        body: JSON.stringify(payload), // Send the payload directly
+                        mode: 'cors' // Required for cross-origin requests if your script is deployed correctly
+                    });
+
+                    // Apps Script web apps usually return with a redirect (status 302) after POST
+                    // or a 200 with the ContentService output.
+                    // We need to read the response as text first, then parse as JSON.
+                    const responseText = await response.text();
+                    const result = JSON.parse(responseText);
+
+
+                    if (result.success) {
+                        showNotification(`Thank you, ${payload.name}! Your message has been sent successfully.`, 'success');
+                        this.reset();
+                    } else {
+                        // Use the message from the API if available, otherwise a generic one
+                        showNotification(result.message || 'An error occurred. Please try again.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showNotification('Failed to send message. Please check your connection and try again.', 'error');
+                } finally {
+                    submitButton.disabled = false;
+                    // Restore button text with SVG
+                    submitButton.innerHTML = `Send Message <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send ml-2 w-5 h-5"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>`;
+                }
             });
         }
     </script>
